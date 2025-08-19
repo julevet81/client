@@ -33,6 +33,10 @@ class AccountController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'nullable|string|max:20',
+            'publication_price' => 'required|numeric|min:0',
+            'weekly_price' => 'required|numeric|min:0',
+            'update_price' => 'required|numeric|min:0',
+            'upload_price' => 'required|numeric|min:0',
         ]);
 
         Account::create($request->all());
@@ -52,6 +56,7 @@ class AccountController extends Controller
             'Publication Price' => $account->publication_price,
             'Weekly Price' => $account->weekly_price,
             'Update Price' => $account->update_price,
+            'Upload Price' => $account->upload_price,
             'Created At' => $account->created_at->format('Y-m-d H:i:s'),
             'Updated At' => $account->updated_at->format('Y-m-d H:i:s'),
         ];
@@ -75,6 +80,10 @@ class AccountController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'nullable|string|max:20',
+            'publication_price' => 'required|numeric|min:0',
+            'weekly_price' => 'required|numeric|min:0',
+            'update_price' => 'required|numeric|min:0',
+            'upload_price' => 'required|numeric|min:0',
         ]);
 
         $account->update($request->all());

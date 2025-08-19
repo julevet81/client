@@ -48,9 +48,22 @@ class SubscriptionController extends Controller
             'status_id' => 'required|exists:statuses,id',
             'client_id' => 'required|exists:clients,id',
             'publication_date' => 'required|date',
+            'email' => 'required|email',
+            'publication_price' => 'required|numeric|min:0',
+            'weekly_price' => 'required|numeric|min:0',
+            'update_price' => 'required|numeric|min:0',
         ]);
 
-        Subscription::create($request->all());
+        Subscription::create([
+        'account_id' => $request->account_id,
+        'status_id' => $request->status_id,
+        'client_id' => $request->client_id,
+        'email' => $request->email,
+        'publication_price' => $request->publication_price,
+        'weekly_price' => $request->weekly_price,
+        'update_price' => $request->update_price,
+        'publication_date' => $request->publication_date,
+    ]);
 
         return redirect()->route('subscriptions.index')->with('success', 'Subscription created successfully.');
     }
@@ -67,10 +80,10 @@ class SubscriptionController extends Controller
             'client' => $subscription->client->name,
             'status' => $subscription->status->name,
             'publication_date' => $subscription->publication_date,
-            'email' => $subscription->account->email, // Assuming you want to show the account email
-            'publication_price' => $subscription->account->publication_price,
-            'weekly_price' => $subscription->account->weekly_price,
-            'update_price' => $subscription->account->update_price,
+            'email' => $subscription->email, // Assuming you want to show the account email
+            'publication_price' => $subscription->publication_price,
+            'weekly_price' => $subscription->weekly_price,
+            'update_price' => $subscription->update_price,
 
         ];
 
@@ -99,9 +112,22 @@ class SubscriptionController extends Controller
             'status_id' => 'required|exists:statuses,id',
             'client_id' => 'required|exists:clients,id',
             'publication_date' => 'required|date',
+            'email' => 'required|email',
+            'publication_price' => 'required|numeric|min:0',
+            'weekly_price' => 'required|numeric|min:0',
+            'update_price' => 'required|numeric|min:0',
         ]);
 
-        $subscription->update($request->all());
+         $subscription->update([
+            'account_id' => $request->account_id,
+            'status_id' => $request->status_id,
+            'client_id' => $request->client_id,
+            'email' => $request->email,
+            'publication_price' => $request->publication_price,
+            'weekly_price' => $request->weekly_price,
+            'update_price' => $request->update_price,
+            'publication_date' => $request->publication_date,
+        ]);
 
         return redirect()->route('subscriptions.index')->with('success', 'Subscription updated successfully.');
     }

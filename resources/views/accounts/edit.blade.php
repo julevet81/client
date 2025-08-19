@@ -66,6 +66,13 @@
                    value="{{ old('update_price', $account->update_price) }}"
                    class="form-control">
         </div>
+        {{-- Upload Price --}}
+        <div class="mb-3">
+            <label for="upload_price" class="form-label">Upload Price</label>
+            <input type="number" name="upload_price" id="upload_price"
+                   value="{{ old('upload_price', $account->upload_price) }}"
+                   class="form-control">
+        </div>
 
         {{-- Submit --}}
         <button type="submit" class="btn btn-primary">Update account</button>

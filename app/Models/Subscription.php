@@ -15,6 +15,10 @@ class Subscription extends Model
         'client_id',
         'status_id',
         'publication_date',
+        'email',
+        'publication_price',
+        'weekly_price',
+        'update_price',
     ];
 
     /**

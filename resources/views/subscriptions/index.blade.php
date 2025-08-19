@@ -56,6 +56,7 @@
 												<th class="border-bottom-0">Account</th>
 												<th class="border-bottom-0">Client</th>
 												<th class="border-bottom-0">Status</th>
+												<th class="border-bottom-0">Email</th>
 												<th class="border-bottom-0">Publication Date</th>
 												<th class="border-bottom-0">Publication Price</th>
 												<th class="border-bottom-0">Weekly Price</th>
@@ -71,10 +72,11 @@
 												<td>{{ $subscription->account->name }}</td>
 												<td>{{ $subscription->client->name }}</td>
 												<td>{{ $subscription->status->name }}</td>
+												<td>{{ $subscription->email }}</td>
 												<td>{{ $subscription->publication_date }}</td>
-												<td>{{ $subscription->account->publication_price }}</td>
-												<td>{{ $subscription->account->weekly_price }}</td>
-												<td>{{ $subscription->account->update_price }}</td>
+												<td>{{ $subscription->publication_price }}</td>
+												<td>{{ $subscription->weekly_price }}</td>
+												<td>{{ $subscription->update_price }}</td>
 												<td>{{ $subscription->created_at }}</td>
 												<td>
 													<a class="modal-effect btn btn-sm btn-success" href="{{ route('subscriptions.show', $subscription->id) }}">show<i class="las la-pen"></i></a>

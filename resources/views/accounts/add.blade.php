@@ -54,6 +54,12 @@
             <input type="number" class="form-control" id="update_price" name="update_price">
           </div>
 
+          {{-- Upload Price --}}
+          <div class="mb-3">
+            <label for="upload_price" class="form-label">Upload Price</label>
+            <input type="number" class="form-control" id="upload_price" name="upload_price">
+          </div>
+
       
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

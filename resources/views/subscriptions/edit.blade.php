@@ -42,19 +42,19 @@
                     <!-- Account Email -->
                     <div class="mb-3">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" class="form-control" value="{{ old('email', $subscription->account->email) }}">
+                        <input type="email" id="email" name="email" class="form-control" value="{{ old('email', $subscription->email) }}">
                     </div>
 
                     <!-- Publication Price -->
                     <div class="mb-3">
                         <label for="publication_price">Publication Price</label>
-                        <input type="number" id="publication_price" name="publication_price" class="form-control" value="{{ old('publication_price', $subscription->account->publication_price) }}">
+                        <input type="number" id="publication_price" name="publication_price" class="form-control" value="{{ old('publication_price', $subscription->publication_price) }}">
                     </div>
 
                     <!-- Weekly Price -->
                     <div class="mb-3">
                         <label for="weekly_price">Weekly Price</label>
-                        <input type="number" id="weekly_price" name="weekly_price" class="form-control" value="{{ old('weekly_price', $subscription->account->weekly_price) }}">
+                        <input type="number" id="weekly_price" name="weekly_price" class="form-control" value="{{ old('weekly_price', $subscription->weekly_price) }}">
                     </div>
 
                     <!-- Update Price -->

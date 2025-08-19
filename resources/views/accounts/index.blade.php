@@ -58,6 +58,7 @@
 											<th class="border-bottom-0">Publication Price</th>
 											<th class="border-bottom-0">Weekly Price</th>
 											<th class="border-bottom-0">Update Price</th>
+											<th class="border-bottom-0">Upload Price</th>
 											<th class="border-bottom-0">Created at</th>
 											<th class="border-bottom-0">Actions</th>
 										</tr>
@@ -71,6 +72,7 @@
 											<td>{{ $account->publication_price }}</td>
 											<td>{{ $account->weekly_price }}</td>
 											<td>{{ $account->update_price }}</td>
+											<td>{{ $account->upload_price }}</td>
 											<td>{{ $account->created_at }}</td>
 											<td>
 												<a class="modal-effect btn btn-sm btn-success" href="{{ route('accounts.show', $account->id) }}">show<i class="las la-pen"></i></a>

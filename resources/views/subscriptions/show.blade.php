@@ -16,7 +16,7 @@
 @section('content')
 	<div class="container">
     <div>
-		<h2>project Details</h2>
+		<h2>Subscription Details</h2>
 	</div>
 
 	<table class="table table-bordered">
