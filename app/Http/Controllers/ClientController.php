@@ -91,4 +91,11 @@ class ClientController extends Controller
 
         return redirect()->route('clients.index')->with('success', 'Client deleted successfully.');
     }
+
+    public function data(Client $client)
+{
+    return response()->json([
+        'email' => $client->email,
+    ]);
+}
 }

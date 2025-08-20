@@ -19,6 +19,7 @@ class Subscription extends Model
         'publication_price',
         'weekly_price',
         'update_price',
+        'upload_price',
     ];
 
     /**

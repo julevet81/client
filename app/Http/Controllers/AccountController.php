@@ -101,9 +101,13 @@ class AccountController extends Controller
         return redirect()->route('accounts.index')->with('success', 'Account deleted successfully.');
     }
 
-    public function getAccountData($id)
-    {
-        $account = Account::findOrFail($id);
-        return response()->json($account);
-    }
+    public function data(Account $account)
+{
+    return response()->json([
+        'publication_price' => $account->publication_price,
+        'weekly_price'      => $account->weekly_price,
+        'update_price'      => $account->update_price,
+        'upload_price'      => $account->upload_price,
+    ]);
+}
 }

@@ -61,6 +61,7 @@
 												<th class="border-bottom-0">Publication Price</th>
 												<th class="border-bottom-0">Weekly Price</th>
 												<th class="border-bottom-0">Update Price</th>
+												<th class="border-bottom-0">Upload Price</th>
 												<th class="border-bottom-0">Created at</th>
 												<th class="border-bottom-0">Actions</th>
 											</tr>
@@ -77,6 +78,7 @@
 												<td>{{ $subscription->publication_price }}</td>
 												<td>{{ $subscription->weekly_price }}</td>
 												<td>{{ $subscription->update_price }}</td>
+												<td>{{ $subscription->upload_price }}</td>
 												<td>{{ $subscription->created_at }}</td>
 												<td>
 													<a class="modal-effect btn btn-sm btn-success" href="{{ route('subscriptions.show', $subscription->id) }}">show<i class="las la-pen"></i></a>

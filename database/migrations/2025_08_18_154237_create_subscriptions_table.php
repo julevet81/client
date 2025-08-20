@@ -20,6 +20,7 @@ return new class extends Migration
             $table->decimal('publication_price', 8, 2);
             $table->decimal('weekly_price', 8, 2);
             $table->decimal('update_price', 8, 2);
+            $table->decimal('upload_price', 8, 2)->default(0.00); // New field for upload price
             $table->date('publication_date');
             $table->timestamps();
             $table->softDeletes(); // Optional: if you want to use soft deletes

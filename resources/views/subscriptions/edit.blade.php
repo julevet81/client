@@ -27,57 +27,11 @@
         @csrf
         @method('PUT')
 
-         <!-- Select Account -->
-                    <div class="mb-3">
-                        <label for="account_id">Account</label>
-                        <select id="account_id" name="account_id" class="form-control">
-                            <option value="">-- Select Account --</option>
-                            @foreach($accounts as $account)
-                                <option value="{{ $account->id }}" {{old('account_id', $subscription->account_id) == $account->id ? 'selected' : '' }}>{{ $account->name }}</option>
-                                    
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <!-- Account Email -->
-                    <div class="mb-3">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" class="form-control" value="{{ old('email', $subscription->email) }}">
-                    </div>
-
-                    <!-- Publication Price -->
-                    <div class="mb-3">
-                        <label for="publication_price">Publication Price</label>
-                        <input type="number" id="publication_price" name="publication_price" class="form-control" value="{{ old('publication_price', $subscription->publication_price) }}">
-                    </div>
-
-                    <!-- Weekly Price -->
-                    <div class="mb-3">
-                        <label for="weekly_price">Weekly Price</label>
-                        <input type="number" id="weekly_price" name="weekly_price" class="form-control" value="{{ old('weekly_price', $subscription->weekly_price) }}">
-                    </div>
-
-                    <!-- Update Price -->
-                    <div class="mb-3">
-                        <label for="update_price">Update Price</label>
-                        <input type="number" id="update_price" name="update_price" class="form-control" value="{{ old('update_price', $subscription->account->update_price) }}">
-                    </div>
-                    <!-- Status -->
-                    <div class="mb-3">
-                        <label for="status_id">Status</label>
-                        <select id="status_id" name="status_id" class="form-control" >
-                            <option value="">-- Select Status --</option>
-                            @foreach($statuses as $status)
-                                <option value="{{ $status->id }}" {{ $status->id == old('status_id', $subscription->status_id) ? 'selected' : '' }}>{{ $status->name }}</option>
-                                    {{ $status->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <!-- Client -->
+        <!-- Select Client -->
                     <div class="mb-3">
                         <label for="client_id">Client</label>
-                        <select id="client_id" name="client_id" class="form-control">
+                        <select id="client_id" name="client_id" class="form-control"
+                            data-url-template="{{ route('clients.data', ['client' => '__CLIENT__']) }}">
                             <option value="">-- Select Client --</option>
                             @foreach($clients as $client)
                                 <option value="{{ $client->id }}" {{ $client->id == old('client_id', $subscription->client_id) ? 'selected' : '' }}>{{ $client->name }}</option>
@@ -85,10 +39,59 @@
                         </select>
                     </div>
 
-                    <!-- Publication Date -->
+                    <!-- Client Email -->
                     <div class="mb-3">
-                        <label for="publication_date">Start Date</label>
-                        <input type="date" id="publication_date" name="publication_date" class="form-control">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" value="{{ old('email', $subscription->email) }}">
+                    </div>
+
+                    <!-- Select Account -->
+                    <div class="mb-3">
+                        <label for="account_id">Account</label>
+                        <select id="account_id" name="account_id" class="form-control"
+                            data-url-template="{{ route('accounts.data', ['account' => '__ACCOUNT__']) }}">
+                            <option value="">-- Select Account --</option>
+                            @foreach($accounts as $account)
+                                <option value="{{ $account->id }}" {{old('account_id', $subscription->account_id) == $account->id ? 'selected' : '' }}>{{ $account->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <!-- Prices -->
+                    <div class="mb-3">
+                        <label for="publication_price">Publication Price</label>
+                        <input type="number" id="publication_price" name="publication_price" class="form-control" value="{{ old('publication_price', $subscription->publication_price) }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="weekly_price">Weekly Price</label>
+                        <input type="number" id="weekly_price" name="weekly_price" class="form-control" value="{{ old('weekly_price', $subscription->weekly_price) }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="update_price">Update Price</label>
+                        <input type="number" id="update_price" name="update_price" class="form-control" value="{{ old('update_price', $subscription->update_price) }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="upload_price">Upload Price</label>
+                        <input type="number" id="upload_price" name="upload_price" class="form-control" value="{{ old('upload_price', $subscription->upload_price) }}">
+                    </div>
+
+                    <!-- Status -->
+                    <div class="mb-3">
+                        <label for="status_id">Status</label>
+                        <select id="status_id" name="status_id" class="form-control">
+                            <option value="">-- Select Status --</option>
+                            @foreach($statuses as $status)
+                                <option value="{{ $status->id }}" {{ $status->id == old('status_id', $subscription->status_id) ? 'selected' : '' }}>
+                                    {{ $status->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <!-- Publication Date -->
+                    <div class="mb-3">  
+                        <label for="publication_date">Publication Date</label>
+                        <input type="date" id="publication_date" name="publication_date" class="form-control" value="{{ old('publication_date') }}">
                     </div>
 
 
@@ -103,16 +106,35 @@
 <!-- jQuery script -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $('#account_id').change(function () {
-        let accountId = $(this).val();
-        if (accountId) {
-            $.get('/accounts/' + accountId + '/data', function (data) {
-                $('#email').val(data.email);
-                $('#publication_price').val(data.publication_price);
-                $('#weekly_price').val(data.weekly_price);
-                $('#update_price').val(data.update_price);
-            });
-        }
+    $(function () {
+        // --- Client selection ---
+        $('#client_id').change(function () {
+            const clientId = $(this).val();
+            const urlTpl = $(this).data('url-template');
+
+            if (clientId) {
+                const url = urlTpl.replace('__CLIENT__', clientId);
+                $.getJSON(url, function (data) {
+                    $('#email').val(data.email || '');
+                });
+            }
+        });
+
+        // --- Account selection ---
+        $('#account_id').change(function () {
+            const accountId = $(this).val();
+            const urlTpl = $(this).data('url-template');
+
+            if (accountId) {
+                const url = urlTpl.replace('__ACCOUNT__', accountId);
+                $.getJSON(url, function (data) {
+                    $('#publication_price').val(data.publication_price || '');
+                    $('#weekly_price').val(data.weekly_price || '');
+                    $('#update_price').val(data.update_price || '');
+                    $('#upload_price').val(data.upload_price || '');
+                });
+            }
+        });
     });
 </script>
 

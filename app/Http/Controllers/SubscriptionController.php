@@ -52,6 +52,7 @@ class SubscriptionController extends Controller
             'publication_price' => 'required|numeric|min:0',
             'weekly_price' => 'required|numeric|min:0',
             'update_price' => 'required|numeric|min:0',
+            'upload_price' => 'required|numeric|min:0', // New field for upload price
         ]);
 
         Subscription::create([
@@ -62,6 +63,7 @@ class SubscriptionController extends Controller
         'publication_price' => $request->publication_price,
         'weekly_price' => $request->weekly_price,
         'update_price' => $request->update_price,
+        'upload_price' => $request->upload_price, // New field for upload price
         'publication_date' => $request->publication_date,
     ]);
 
@@ -84,6 +86,7 @@ class SubscriptionController extends Controller
             'publication_price' => $subscription->publication_price,
             'weekly_price' => $subscription->weekly_price,
             'update_price' => $subscription->update_price,
+            'upload_price' => $subscription->upload_price, // New field for upload price
 
         ];
 
@@ -116,6 +119,7 @@ class SubscriptionController extends Controller
             'publication_price' => 'required|numeric|min:0',
             'weekly_price' => 'required|numeric|min:0',
             'update_price' => 'required|numeric|min:0',
+            'upload_price' => 'required|numeric|min:0',
         ]);
 
          $subscription->update([
@@ -126,6 +130,7 @@ class SubscriptionController extends Controller
             'publication_price' => $request->publication_price,
             'weekly_price' => $request->weekly_price,
             'update_price' => $request->update_price,
+            'upload_price' => $request->upload_price, // New field for upload price
             'publication_date' => $request->publication_date,
         ]);
 

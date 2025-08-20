@@ -25,13 +25,14 @@ Route::middleware('auth')->group(function () {
 Route::resource('clients', ClientController::class)
     ->middleware(['auth', 'verified'])
     ->names('clients');
+Route::get('/clients/{client}/data', [ClientController::class, 'data'])->name('clients.data');
 
 ########### Account Management ################
 
 Route::resource('accounts', AccountController::class)
     ->middleware(['auth', 'verified'])
     ->names('accounts');
-Route::get('/accounts/{id}/data', [AccountController::class, 'getAccountData']);
+Route::get('/accounts/{account}/data', [AccountController::class, 'data'])->name('accounts.data');
 
 ########### Subscription Management ################
 Route::resource('subscriptions', SubscriptionController::class)
