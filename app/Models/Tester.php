@@ -6,21 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
-class Device extends Model
+class Tester extends Model
 {
-    use SoftDeletes, HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        
-        'name',
-        'OS',
-        'owner_name',
+        "name",
+        "email",
     ];
 
-    public function accounts()
+    public function application()
     {
-        return $this->hasMany(Account::class);
+        return $this->belongsToMany(Application::class, 'application_tester');
     }
+
+
 
 }

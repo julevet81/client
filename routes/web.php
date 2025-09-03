@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\SubscriptionController;
@@ -26,6 +28,9 @@ Route::resource('clients', ClientController::class)
     ->middleware(['auth', 'verified'])
     ->names('clients');
 Route::get('/clients/{client}/data', [ClientController::class, 'data'])->name('clients.data');
+Route::get('/clients/{client}/buy', [ClientController::class, 'buy'])->name('clients.buy');
+Route::post('/clients/{client}/buy', [ClientController::class, 'storePurchase'])->name('clients.storePurchase');
+
 
 ########### Account Management ################
 
@@ -42,6 +47,16 @@ Route::resource('subscriptions', SubscriptionController::class)
 Route::resource('statuses', StatusController::class)
     ->middleware(['auth', 'verified'])
     ->names('statuses');
+
+########### Devices Management ################
+Route::resource('devices', DeviceController::class)
+    ->middleware(['auth', 'verified'])
+    ->names('devices');
+
+########### Application Management #############
+Route::resource('applications', ApplicationController::class)
+    ->middleware(['auth', 'verified'])
+    ->names(names: 'applications');
 
 
 require __DIR__.'/auth.php';

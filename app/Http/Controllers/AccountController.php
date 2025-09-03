@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\Device;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -13,7 +14,8 @@ class AccountController extends Controller
     public function index()
     {
         $accounts = Account::all();
-        return view('accounts.index', compact('accounts'));
+        $devices = Device::all();
+        return view('accounts.index', compact('accounts', 'devices'));
     }
 
     /**
@@ -21,7 +23,8 @@ class AccountController extends Controller
      */
     public function create()
     {
-        return view('accounts.create');
+        $devices = Device::all();
+        return view('accounts.create', compact('devices'));
     }
 
     /**
@@ -52,6 +55,7 @@ class AccountController extends Controller
         $account = Account::where('id', $account->id)->first();
         $accountData = [
             'Name' => $account->name,
+            'device_id' => $account->device_id,
             'Email' => $account->email,
             'Publication Price' => $account->publication_price,
             'Weekly Price' => $account->weekly_price,

@@ -14,15 +14,17 @@ return new class extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('owner_name');
+            $table->string('owner_name')->nullable();
             $table->string('email')->unique();
             $table->string('phone');
             $table->decimal('publication_price', 10, 2)->default(0.00);
             $table->decimal('weekly_price', 10, 2)->default(0.00);
             $table->decimal('update_price', 10, 2)->default(0.00);
             $table->decimal('upload_price', 8, 2);
+            $table->decimal('price', 8, 2);
             $table->date('open_date')->nullable();
-            $table->date('activation_date')->nullable();
+            $table->date( 'activation_date')->nullable();
+            $table->boolean('is_sold')->default(false);
             $table->timestamps();
             $table->softDeletes(); // Optional: if you want to use soft deletes
         });

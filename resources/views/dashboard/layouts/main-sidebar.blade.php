@@ -36,6 +36,9 @@
 					<li class="slide">
 						<a class="side-menu__item" href="{{ route('statuses.index') }}"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M12 4a8 8 0 100 16 8 8 0 000-16zm1 14.93V13h3.07A6.007 6.007 0 0113 18.93zM11 18.93A6.007 6.007 0 017.93 13H11v5.93zM13 11V6.07A6.007 6.007 0 0116.07 11H13zm-2-4.93V11H7.93A6.007 6.007 0 0111 6.07z"/></svg><span class="side-menu__label">Statuses</span></a>
 					</li>
+					<li class="slide">
+						<a class="side-menu__item" href="{{ route('devices.index') }}"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M12 4a8 8 0 100 16 8 8 0 000-16zm1 14.93V13h3.07A6.007 6.007 0 0113 18.93zM11 18.93A6.007 6.007 0 017.93 13H11v5.93zM13 11V6.07A6.007 6.007 0 0116.07 11H13zm-2-4.93V11H7.93A6.007 6.007 0 0111 6.07z"/></svg><span class="side-menu__label">Devices</span></a>
+					</li>
 
 					<li class="side-item side-item-category">General</li>
 					<li class="slide">

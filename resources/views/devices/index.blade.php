@@ -9,7 +9,7 @@
 				<div class="breadcrumb-header justify-content-between">
 					<div class="my-auto">
 						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Empty</span>
+							<h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Devices</span>
 						</div>
 					</div>
 					
@@ -27,7 +27,7 @@
 							<div class="d-flex justify-content-between">
 								<!-- Button trigger modal -->
 								<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-									Add account
+									Add device
 								</button>
 							</div>
 						</div>
@@ -53,46 +53,26 @@
 									<thead>
 										<tr>
 											<th class="border-bottom-0">#</th>
-											<th class="border-bottom-0">account Name</th>
+											<th class="border-bottom-0">device Name</th>
+											<th class="border-bottom-0">Operation System</th>
 											<th class="border-bottom-0">Owner Name</th>
-											<th class="border-bottom-0">Email</th>
-											<th class="border-bottom-0">Phone</th>
-											<th class="border-bottom-0">Publication Price</th>
-											<th class="border-bottom-0">Weekly Price</th>
-											<th class="border-bottom-0">Update Price</th>
-											<th class="border-bottom-0">Upload Price</th>
-											<th class="border-bottom-0">Purchase Price</th>
-											<th class="border-bottom-0">Open Date</th>
-											<th class="border-bottom-0">Activation Date</th>
-											<th class="border-bottom-0">Is Sold</th>
-											<th class="border-bottom-0">Created at</th>
 											<th class="border-bottom-0">Actions</th>
 										</tr>
 									</thead>
 									<tbody>
-										@foreach($accounts as $account)
+										@foreach($devices as $device)
 										<tr>
 											<td>{{ $loop->iteration }}</td>
-											<td>{{ $account->name }}</td>
-											<td>{{ $account->owner_name }}</td>
-											<td>{{ $account->email }}</td>
-											<td>{{ $account->phone }}</td>
-											<td>{{ $account->publication_price }}</td>
-											<td>{{ $account->weekly_price }}</td>
-											<td>{{ $account->update_price }}</td>
-											<td>{{ $account->upload_price }}</td>
-											<td>{{ $account->price }}</td>
-											<td>{{ $account->open_date }}</td>
-											<td>{{ $account->activation_date }}</td>
-											<td>{{ $account->is_sold }}</td>
-											<td>{{ $account->created_at }}</td>
+											<td>{{ $device->name }}</td>
+											<td>{{ $device->OS }}</td>
+											<td>{{ $device->owner_name }}</td>
 											<td>
-												<a class="modal-effect btn btn-sm btn-success" href="{{ route('accounts.show', $account->id) }}">show<i class="las la-pen"></i></a>
-												<a class="modal-effect btn btn-sm btn-info"  href="{{ route('accounts.edit', $account->id) }}">edit<i class="las la-pen"></i></a>
-												<a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$account->id}}">delete<i class="las la-trash"></i></a>
+												<a class="modal-effect btn btn-sm btn-success" href="{{ route('devices.show', $device->id) }}">show<i class="las la-pen"></i></a>
+												<a class="modal-effect btn btn-sm btn-info"  href="{{ route('devices.edit', $device->id) }}">edit<i class="las la-pen"></i></a>
+												<a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$device->id}}">delete<i class="las la-trash"></i></a>
 											</td>
 										</tr>
-										@include('accounts.delete')
+										@include('devices.delete')
 										@endforeach
 									</tbody>
 								</table>
@@ -103,7 +83,7 @@
 
 				</div>
 				<!--/div-->
-				@include('accounts.add')
+				@include('devices.add')
 			</div>
 	<!-- Container closed -->
 @endsection

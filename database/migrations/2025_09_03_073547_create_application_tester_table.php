@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('devices', function (Blueprint $table) {
+        Schema::create('application_tester', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->enum('OS', ['Android','IOS']);
-            $table->string('owner_name');
+            $table->foreignId('application_id')->constrained()->onDelete('cascade');
+            $table->foreignId('tester_id')->unique();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('devices');
+        Schema::dropIfExists('application_tester');
     }
 };

@@ -69,7 +69,8 @@
 												<td>{{ $client->email }}</td>
 												<td>{{ $client->created_at }}</td>
 												<td>
-													<a class="modal-effect btn btn-sm btn-success" href="{{ route('clients.show', $client->id) }}">show<i class="las la-pen"></i></a>
+													<a class="modal-effect btn btn-sm btn-success" href="{{ route( 'clients.show', $client->id) }}">show<i class="las la-pen"></i></a>
+													<a class="modal-effect btn btn-sm btn-primary" href="{{ route( 'clients.buy', $client->id) }}">Buy<i class="las la-pen"></i></a>
 													<a class="modal-effect btn btn-sm btn-info"  href="{{ route('clients.edit', $client->id) }}">edit<i class="las la-pen"></i></a>
                                                     <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$client->id}}">delete<i class="las la-trash"></i></a>
 												</td>

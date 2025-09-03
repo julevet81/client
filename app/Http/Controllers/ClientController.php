@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\Client;
+use App\Models\Purchase;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -93,9 +95,43 @@ class ClientController extends Controller
     }
 
     public function data(Client $client)
-{
-    return response()->json([
-        'email' => $client->email,
-    ]);
-}
+    {
+        return response()->json([
+            'email' => $client->email,
+        ]);
+    }
+
+    public function buy(Client $client)
+    {
+        $accounts = Account::where('is_sold', false)->get();
+        return view('clients.buy', compact('client', 'accounts'));
+    }
+
+    public function storePurchase(Request $request, Client $client)
+    {
+        $validated = $request->validate([
+            'accounts' => 'required|array|min:1',
+            'accounts.*' => 'exists:accounts,id',
+            'payment_method' => 'required|string',
+        ]);
+
+        // Calculate total
+        $accounts = Account::whereIn('id', $validated['accounts'])->where('is_sold', false)->get();
+        $total = $accounts->sum('publication_price'); // adjust if you use another price column
+
+        // Create purchase
+        $purchase = Purchase::create([
+            'client_id' => $client->id,
+            'total_price' => $total,
+            'payment_method' => $validated['payment_method'],
+        ]);
+
+        // Attach accounts and mark as sold
+        foreach ($accounts as $account) {
+            $purchase->accounts()->attach($account->id, ['price' => $account->publication_price]);
+            $account->update(['is_sold' => true]);
+        }
+
+        return redirect()->route('clients.index')->with('success', 'Purchase completed successfully.');
+    }
 }

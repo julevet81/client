@@ -11,11 +11,18 @@ class Account extends Model
     use HasFactory, SoftDeletes;
     protected $fillable = [
         'name',
+        'owner_name',
+        'device_id',
         'email',
+        'phone',
         'publication_price',
         'weekly_price',
         'update_price',
         'upload_price',
+        'price',
+        'open_date',
+        'activation_date',
+        'is_sold'
     ];
 
     /**
@@ -32,5 +39,10 @@ class Account extends Model
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class);
+    }
+
+    public function device()
+    {
+        return $this->belongsTo(Device::class);
     }
 }

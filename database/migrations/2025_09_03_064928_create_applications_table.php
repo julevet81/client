@@ -22,6 +22,7 @@ return new class extends Migration
             $table->enum('status', ['In_progress','In_upload', 'In_test', 'Activated', 'Deleted'])->default('In_progress');
             $table->string('testers');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

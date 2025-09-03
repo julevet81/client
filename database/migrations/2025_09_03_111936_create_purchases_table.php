@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('devices', function (Blueprint $table) {
+        Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->enum('OS', ['Android','IOS']);
-            $table->string('owner_name');
+            $table->foreignId('client_id')->constrained('clients', 'id')->cascadeOnDelete();
+            $table->decimal('total_price', 10, 2)->default(0.00);
+            $table->enum('payment_method', ['cash', 'credit_card', 'bank_transfer']);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('devices');
+        Schema::dropIfExists('purchases');
     }
 };
