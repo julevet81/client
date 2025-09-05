@@ -28,8 +28,8 @@
                 <select name="accounts[]" class="form-select account-select" required>
                     <option value="" disabled selected>-- Select Account --</option>
                     @foreach($accounts as $account)
-                        <option value="{{ $account->id }}" data-price="{{ $account->publication_price }}">
-                            {{ $account->name }} ({{ $account->publication_price }} $)
+                        <option value="{{ $account->id }}" data-price="{{ $account->price }}">
+                            {{ $account->name }} ({{ $account->price }} $)
                         </option>
                     @endforeach
                 </select>

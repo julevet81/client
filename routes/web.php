@@ -5,6 +5,7 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
@@ -56,7 +57,12 @@ Route::resource('devices', DeviceController::class)
 ########### Application Management #############
 Route::resource('applications', ApplicationController::class)
     ->middleware(['auth', 'verified'])
-    ->names(names: 'applications');
+    ->names( 'applications');
+
+########### Purchases Management ##############
+Route::resource('purchases', PurchaseController::class)
+    ->middleware(['auth', 'verified'])
+    ->names( 'purchases');
 
 
 require __DIR__.'/auth.php';

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->dateTime('end_test_date')->nullable();
             $table->dateTime('acceptation_date')->nullable();
             $table->enum('status', ['In_progress','In_upload', 'In_test', 'Activated', 'Deleted'])->default('In_progress');
-            $table->string('testers');
+            $table->text('testers');
             $table->timestamps();
             $table->softDeletes();
         });

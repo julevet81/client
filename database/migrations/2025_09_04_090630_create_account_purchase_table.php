@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('application_tester', function (Blueprint $table) {
+        Schema::create('account_purchase', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('application_id')->constrained()->onDelete('cascade');
-            $table->foreignId('tester_id')->constrained()->onDelete('cascade');
+            $table->foreignId('purchase_id')->constrained('purchases', 'id')->cascadeOnDelete();
+            $table->foreignId('account_id')->constrained('accounts', 'id')->cascadeOnDelete();
+            $table->decimal('price', 10, 2)->default(0.00);
             $table->timestamps();
-
-
         });
     }
 
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('application_tester');
+        Schema::dropIfExists('account_purchase');
     }
 };

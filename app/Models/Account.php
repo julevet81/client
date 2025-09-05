@@ -45,4 +45,17 @@ class Account extends Model
     {
         return $this->belongsTo(Device::class);
     }
+
+    public function purchases()
+    {
+        return $this->belongsToMany(Purchase::class, 'account_purchase')
+                ->withPivot('price')
+                ->withTimestamps();
+    }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
+    }
+
 }

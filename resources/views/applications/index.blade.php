@@ -27,7 +27,7 @@
 							<div class="d-flex justify-content-between">
 								<!-- Button trigger modal -->
 								<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-									Add account
+									Add application
 								</button>
 							</div>
 						</div>
@@ -53,48 +53,40 @@
 									<thead>
 										<tr>
 											<th class="border-bottom-0">#</th>
-											<th class="border-bottom-0">account Name</th>
-											<th class="border-bottom-0">Owner Name</th>
-											<th class="border-bottom-0">Device</th>
-											<th class="border-bottom-0">Email</th>
-											<th class="border-bottom-0">Phone</th>
-											<th class="border-bottom-0">Publication Price</th>
-											<th class="border-bottom-0">Weekly Price</th>
-											<th class="border-bottom-0">Update Price</th>
-											<th class="border-bottom-0">Upload Price</th>
-											<th class="border-bottom-0">Purchase Price</th>
-											<th class="border-bottom-0">Open Date</th>
-											<th class="border-bottom-0">Activation Date</th>
-											<th class="border-bottom-0">Is Sold</th>
+											<th class="border-bottom-0">application Name</th>
+											<th class="border-bottom-0">Account</th>
+											<th class="border-bottom-0">Upload Date</th>
+											<th class="border-bottom-0">Start Test Date</th>
+											<th class="border-bottom-0">End Test Date</th>
+											<th class="border-bottom-0">Status</th>
+											<th class="border-bottom-0">Testers</th>
 											<th class="border-bottom-0">Created at</th>
 											<th class="border-bottom-0">Actions</th>
 										</tr>
 									</thead>
 									<tbody>
-										@foreach($accounts as $account)
-										<tr>
-											<td>{{ $loop->iteration }}</td>
-											<td>{{ $account->name }}</td>
-											<td>{{ $account->owner_name }}</td>
-											<td>{{ $account->device->name }}</td>
-											<td>{{ $account->email }}</td>
-											<td>{{ $account->phone }}</td>
-											<td>{{ $account->publication_price }}</td>
-											<td>{{ $account->weekly_price }}</td>
-											<td>{{ $account->update_price }}</td>
-											<td>{{ $account->upload_price }}</td>
-											<td>{{ $account->price }}</td>
-											<td>{{ $account->open_date }}</td>
-											<td>{{ $account->activation_date }}</td>
-											<td>{{ $account->is_sold }}</td>
-											<td>{{ $account->created_at }}</td>
-											<td>
-												<a class="modal-effect btn btn-sm btn-success" href="{{ route('accounts.show', $account->id) }}">show<i class="las la-pen"></i></a>
-												<a class="modal-effect btn btn-sm btn-info"  href="{{ route('accounts.edit', $account->id) }}">edit<i class="las la-pen"></i></a>
-												<a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$account->id}}">delete<i class="las la-trash"></i></a>
-											</td>
-										</tr>
-										@include('accounts.delete')
+										@foreach($applications as $application)
+											<tr>
+												<td>{{ $loop->iteration }}</td>
+												<td>{{ $application->name }}</td>
+												<td>{{ $application->account->name }}</td>
+												<td>{{ $application->upload_date }}</td>
+												<td>{{ $application->start_test_date }}</td>
+												<td>{{ $application->end_test_date }}</td>
+												<td>{{ $application->status }}</td>
+												<td>
+													@foreach($application->testerEmails as $email)
+														{{ $email }}<br>
+													@endforeach
+												</td>
+												<td>{{ $application->created_at }}</td>
+												<td>
+													<a class="modal-effect btn btn-sm btn-success" href="{{ route('applications.show', $application->id) }}">show<i class="las la-pen"></i></a>
+													<a class="modal-effect btn btn-sm btn-info"  href="{{ route('applications.edit', $application->id) }}">edit<i class="las la-pen"></i></a>
+													<a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$application->id}}">delete<i class="las la-trash"></i></a>
+												</td>
+											</tr>
+											@include('applications.delete')
 										@endforeach
 									</tbody>
 								</table>
@@ -105,7 +97,7 @@
 
 				</div>
 				<!--/div-->
-				@include('accounts.add')
+				@include('applications.add')
 			</div>
 	<!-- Container closed -->
 @endsection

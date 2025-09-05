@@ -30,5 +30,12 @@ class Application extends Model
         return $this->belongsToMany(Tester::class, 'application_tester');
     }
 
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
+    }
+
+    
+
     
 }

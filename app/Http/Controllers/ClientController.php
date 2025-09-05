@@ -117,7 +117,7 @@ class ClientController extends Controller
 
         // Calculate total
         $accounts = Account::whereIn('id', $validated['accounts'])->where('is_sold', false)->get();
-        $total = $accounts->sum('publication_price'); // adjust if you use another price column
+        $total = $accounts->sum('price'); // adjust if you use another price column
 
         // Create purchase
         $purchase = Purchase::create([
@@ -128,10 +128,10 @@ class ClientController extends Controller
 
         // Attach accounts and mark as sold
         foreach ($accounts as $account) {
-            $purchase->accounts()->attach($account->id, ['price' => $account->publication_price]);
+            $purchase->accounts()->attach($account->id, ['price' => $account->price]);
             $account->update(['is_sold' => true]);
         }
 
-        return redirect()->route('clients.index')->with('success', 'Purchase completed successfully.');
+        return redirect()->route('purchass.index')->with('success', 'Purchase completed successfully.');
     }
 }

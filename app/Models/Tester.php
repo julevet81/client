@@ -15,7 +15,7 @@ class Tester extends Model
         "email",
     ];
 
-    public function application()
+    public function applications()
     {
         return $this->belongsToMany(Application::class, 'application_tester');
     }

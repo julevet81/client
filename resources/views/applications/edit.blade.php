@@ -5,7 +5,7 @@
 @section('content')
 				
 <div class="container">
-    <h2>Edit account</h2>
+    <h2>Edit application</h2>
     <div>
         @if(session('success'))
           <div class="alert alert-success">
@@ -23,15 +23,15 @@
         @endif
     </div>
 
-    <form action="{{ route('accounts.update', $account->id) }}" method="POST">
+    <form action="{{ route('applications.update', $application->id) }}" method="POST">
         @csrf
         @method('PUT')
 
-        {{-- account Name --}}
+        {{-- application Name --}}
         <div class="mb-3">
-            <label for="name" class="form-label">account Name</label>
+            <label for="name" class="form-label">application Name</label>
             <input type="text" name="name" id="name"
-                   value="{{ old('name', $account->name) }}"
+                   value="{{ old('name', $application->name) }}"
                    class="form-control" required>
         </div>
         {{-- Device --}}
@@ -55,7 +55,7 @@
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" name="email" id="email"
-                   value="{{ old('email', $account->email) }}"
+                   value="{{ old('email', $application->email) }}"
                    class="form-control" required>
         </div>
 
@@ -69,7 +69,7 @@
         <div class="mb-3">
             <label for="publication_price" class="form-label">Publication Price</label>
             <input type="number" name="publication_price" id="publication_price"
-                   value="{{ old('publication_price', $account->publication_price) }}"
+                   value="{{ old('publication_price', $application->publication_price) }}"
                    class="form-control">
         </div>
 
@@ -77,7 +77,7 @@
         <div class="mb-3">
             <label for="weekly_price" class="form-label">Weekly Price</label>
             <input type="number" name="weekly_price" id="weekly_price"
-                   value="{{ old('weekly_price', $account->weekly_price) }}"
+                   value="{{ old('weekly_price', $application->weekly_price) }}"
                    class="form-control">
         </div>
 
@@ -85,39 +85,39 @@
         <div class="mb-3">
             <label for="update_price" class="form-label">Update Price</label>
             <input type="number" name="update_price" id="update_price"
-                   value="{{ old('update_price', $account->update_price) }}"
+                   value="{{ old('update_price', $application->update_price) }}"
                    class="form-control">
         </div>
         {{-- Upload Price --}}
         <div class="mb-3">
             <label for="upload_price" class="form-label">Upload Price</label>
             <input type="number" name="upload_price" id="upload_price"
-                   value="{{ old('upload_price', $account->upload_price) }}"
+                   value="{{ old('upload_price', $application->upload_price) }}"
                    class="form-control">
         </div>
 
         {{-- Purchase Price --}}
           <div class="mb-3">
             <label for="price" class="form-label">Purchase Price</label>
-            <input type="number" class="form-control" id="price" name="price" value="{{ old('price', $account->price) }}">
+            <input type="number" class="form-control" id="price" name="price" value="{{ old('price', $application->price) }}">
           </div>
 
           {{-- Open Date --}}
           <div class="mb-3">
             <label for="open_date" class="form-label">Open Date</label>
-            <input type="date" class="form-control" id="open_date" name="open_date" value="{{ old('open_date', $account->open_date) }}">
+            <input type="date" class="form-control" id="open_date" name="open_date" value="{{ old('open_date', $application->open_date) }}">
           </div>
 
           {{-- Activation Date --}}
           <div class="mb-3">
             <label for="activation_date" class="form-label">Activation Date</label>
-            <input type="date" class="form-control" id="activation_date" name="activation_date" value="{{ old('activation_date', $account->activation_date) }}">
+            <input type="date" class="form-control" id="activation_date" name="activation_date" value="{{ old('activation_date', $application->activation_date) }}">
           </div>
           {{-- Status --}}
           
 
         {{-- Submit --}}
-        <button type="submit" class="btn btn-primary">Update account</button>
+        <button type="submit" class="btn btn-primary">Update application</button>
     </form>
 </div>
 @endsection
