@@ -3,123 +3,96 @@
 @endsection
 
 @section('content')
-				
-<div class="container">
-    <h2>Edit application</h2>
-    <div>
-        @if(session('success'))
-          <div class="alert alert-success">
-            {{ session('success') }}
-          </div>
-        @endif
-        @if($errors->any())
-          <div class="alert alert-danger">
-            <ul>
-              @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-              @endforeach
-            </ul>
-          </div>
-        @endif
-    </div>
 
-    <form action="{{ route('applications.update', $application->id) }}" method="POST">
-        @csrf
-        @method('PUT')
+  <div class="container">
+      <h2>Edit application</h2>
+      <div>
+          @if(session('success'))
+            <div class="alert alert-success">
+              {{ session('success') }}
+            </div>
+          @endif
+          @if($errors->any())
+            <div class="alert alert-danger">
+              <ul>
+                @foreach($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
+      </div>
 
-        {{-- application Name --}}
-        <div class="mb-3">
+      <form action="{{ route('applications.update', $application->id) }}" method="POST">
+          @csrf
+          @method('PUT')
+
+          {{-- application Name --}}
+          <div class="mb-3">
             <label for="name" class="form-label">application Name</label>
-            <input type="text" name="name" id="name"
-                   value="{{ old('name', $application->name) }}"
-                   class="form-control" required>
-        </div>
-        {{-- Device --}}
+            <input type="text" name="name" id="name" value="{{ old('name', $application->name) }}" class="form-control" required>
+          </div>
+          {{-- Device --}}
           <div class="mb-3">
             <label for="device_id" class="form-label">Device</label>
-            <select name="device_id" id="device_id"
-                    class="form-select @error('device_id') is-invalid @enderror" required>
-                <option value="" disabled selected>-- Select Device --</option>
-                @foreach($devices as $device)
+            <select name="device_id" id="device_id" class="form-select @error('device_id') is-invalid @enderror" required>
+              <option value="" disabled selected>-- Select Device --</option> @foreach($devices as $device)
                     <option value="{{ $device->id }}" {{ old('device_id') == $device->id ? 'selected' : '' }}>
-                        {{ $device->name }} ({{ $device->OS }})
-                    </option>
-                @endforeach
-            </select>
-            @error('device_id')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-
-        {{-- Email --}}
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" id="email"
-                   value="{{ old('email', $application->email) }}"
-                   class="form-control" required>
-        </div>
-
-        {{-- Phone --}}
-          <div class="mb-3">
-            <label for="phone" class="form-label">Phone</label>
-            <input type="phone" class="form-control" id="phone" name="phone" required>
+                {{ $device->name }} ({{ $device->OS }})
+              </option> @endforeach </select> @error('device_id')     <div class="invalid-feedback">{{ $message }}
+                  </div>
+                @enderror
           </div> 
+          {{-- Upload Date --}} 
 
-        {{-- Publication Price --}}
-        <div class="mb-3">
-            <label for="publication_price" class="form-label">Publication Price</label>
-            <input type="number" name="publication_price" id="publication_price"
-                   value="{{ old('publication_price', $application->publication_price) }}"
-                   class="form-control">
-        </div>
-
-        {{-- Weekly Price --}}
-        <div class="mb-3">
-            <label for="weekly_price" class="form-label">Weekly Price</label>
-            <input type="number" name="weekly_price" id="weekly_price"
-                   value="{{ old('weekly_price', $application->weekly_price) }}"
-                   class="form-control">
-        </div>
-
-        {{-- Update Price --}}
-        <div class="mb-3">
-            <label for="update_price" class="form-label">Update Price</label>
-            <input type="number" name="update_price" id="update_price"
-                   value="{{ old('update_price', $application->update_price) }}"
-                   class="form-control">
-        </div>
-        {{-- Upload Price --}}
-        <div class="mb-3">
-            <label for="upload_price" class="form-label">Upload Price</label>
-            <input type="number" name="upload_price" id="upload_price"
-                   value="{{ old('upload_price', $application->upload_price) }}"
-                   class="form-control">
-        </div>
-
-        {{-- Purchase Price --}}
           <div class="mb-3">
-            <label for="price" class="form-label">Purchase Price</label>
-            <input type="number" class="form-control" id="price" name="price" value="{{ old('price', $application->price) }}">
+            <label for="upload_date" class="form-label">Upload Date</label>
+            <input type="date" class="form-control" id="upload_date" name="upload_date" 
+            value="{{ old('upload_date', $application->upload_date) }}">
           </div>
 
-          {{-- Open Date --}}
+          {{-- Start Test Date --}}
           <div class="mb-3">
-            <label for="open_date" class="form-label">Open Date</label>
-            <input type="date" class="form-control" id="open_date" name="open_date" value="{{ old('open_date', $application->open_date) }}">
+            <label for="start_test_date" class="form-label">Start Test Date</label>
+            <input type="date" class="form-control" id="start_test_date" name="start_test_date"
+            value="{{ old('start_test_date', $application->start_test_date) }}">
           </div>
 
-          {{-- Activation Date --}}
+          {{-- End Test Date --}}
           <div class="mb-3">
-            <label for="activation_date" class="form-label">Activation Date</label>
-            <input type="date" class="form-control" id="activation_date" name="activation_date" value="{{ old('activation_date', $application->activation_date) }}">
+            <label for="end_test_date" class="form-label">End Test Date</label>
+            <input type="date" class="form-control" id="end_test_date" name="end_test_date"
+            value="{{ old('end_test_date', $application->end_test_date) }}">
           </div>
-          {{-- Status --}}
-          
 
-        {{-- Submit --}}
-        <button type="submit" class="btn btn-primary">Update application</button>
-    </form>
-</div>
+          <!-- Status -->
+          <div class="form-group">
+            <label for="status">Status</label>
+            <select name="status" class="form-control" required>
+              @foreach(['In_progress', 'In_upload', 'In_test', 'Activated', 'Deleted'] as $status)
+                <option value="{{ $status }}" {{ $application->status === $status ? 'selected' : '' }}>
+                  {{ $status }}
+                </option>
+              @endforeach
+            </select>
+          </div>
+          <!-- Testers -->
+          <div class="form-group">
+            <label for="testers">Select Testers (max 20)</label><br>
+            @foreach($testers as $tester)
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="testers[]" value="{{ $tester->id }}" {{ in_array($tester->id, $application->testers ?? []) ? 'checked' : '' }}>
+                <label class="form-check-label">
+                  {{ $tester->name }} ({{ $tester->email }})
+                </label>
+              </div>
+            @endforeach
+          </div>
+
+          {{-- Submit --}}
+          <button type="submit" class="btn btn-primary">Update application</button>
+      </form>
+  </div>
 @endsection
 @section('js')
 @endsection

@@ -78,7 +78,12 @@ class ApplicationController extends Controller
      */
     public function show(Application $application)
     {
-        //
+
+        // Fetch testers from IDs stored in JSON column
+        $testers = Tester::whereIn('id', $application->testers ?? [])->get();
+
+        return view('applications.show', compact('application', 'testers'));
+
     }
 
     /**
@@ -86,7 +91,15 @@ class ApplicationController extends Controller
      */
     public function edit(Application $application)
     {
-        //
+        $statuses = ['In_progress','In_upload','In_test','Activated','Deleted'];
+        $devices = Device::all();
+        $accounts = Account::all();
+        $testers = Tester::whereDoesntHave('applications')->orWhereHas('applications', function ($query) use ($application) {
+            $query->where('applications.id', $application->id);
+        })->get();
+        $application->load('testers');
+        $application->testerEmails = Tester::whereIn('id', $application->testers ?? [])->pluck('email')->toArray();
+        return view('applications.edit', compact('application', 'statuses', 'accounts', 'testers', 'devices'));
     }
 
     /**
@@ -94,7 +107,19 @@ class ApplicationController extends Controller
      */
     public function update(Request $request, Application $application)
     {
-        //
+        $request->validate([
+            'name'            => 'required|string',
+            'account_id'      => 'required|exists:accounts,id',
+            'upload_date'     => 'nullable|date',
+            'start_test_date' => 'nullable|date',
+            'end_test_date'   => 'nullable|date',
+            'acceptation_date'=> 'nullable|date',
+            'status'          => 'required|in:In_progress,In_upload,In_test,Activated,Deleted',
+            'testers.*'       => 'exists:testers,id',
+        ]);
+        $application->update($request->all());
+        $application->testers()->sync($request->testers);
+        return redirect()->route('applications.index')->with('success', 'Application updated successfully.');
     }
 
     /**
@@ -102,6 +127,8 @@ class ApplicationController extends Controller
      */
     public function destroy(Application $application)
     {
-        //
+        $application->testers()->detach();
+        $application->delete();
+        return redirect()->route('applications.index')->with('success', 'Application deleted successfully.');
     }
 }

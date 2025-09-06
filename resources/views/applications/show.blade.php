@@ -14,29 +14,36 @@
 				<!-- breadcrumb -->
 @endsection
 @section('content')
-	<div class="container">
-    <div>
-		<h2>project Details</h2>
-	</div>
 
-	<table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Field</th>
-                <th>Value</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($applicationData as $key => $value)
-                <tr>
-                    <td>{{ ucfirst(str_replace('_', ' ', $key)) }}</td>
-                    <td>{{ $value }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+<div class="container">
+    <h2>Application Details</h2>
 
+    <div class="card mb-3">
+        <div class="card-body">
+            <p><strong>ID:</strong> {{ $application->id }}</p>
+            <p><strong>Status:</strong> {{ $application->status }}</p>
+            <p><strong>Upload Date:</strong> {{ $application->upload_date }}</p>
+            <p><strong>Start Test Date:</strong> {{ $application->start_test_date }}</p>
+            <p><strong>End Test Date:</strong> {{ $application->end_test_date }}</p>
+            <p><strong>Acceptation Date:</strong> {{ $application->acceptation_date }}</p>
+        </div>
     </div>
+
+    <h4>Assigned Testers</h4>
+    @if($testers->count())
+        <ul>
+            @foreach($testers as $tester)
+                <li>{{ $tester->name }} ({{ $tester->email }})</li>
+            @endforeach
+        </ul>
+    @else
+        <p>No testers assigned.</p>
+    @endif
+
+    <a href="{{ route('applications.index') }}" class="btn btn-secondary mt-3">Back to Applications</a>
+</div>
+
+
 @endsection
 @section('js')
 @endsection

@@ -26,7 +26,7 @@
             <label for="name" class="form-label">application Name</label>
             <input type="text" class="form-control" id="name" name="name" required>
           </div>
-          <!-- Select Account -->
+          {{-- Account --}}
           <div class="mb-3">
             <label for="account_id">Account</label>
             <select id="account_id" name="account_id" class="form-control"
